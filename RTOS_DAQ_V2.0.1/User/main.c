@@ -9,7 +9,7 @@ V2.0.1
 修复BUG：调用延时函数时，意外关闭滴答计时器，导致RTOS系统死机
 
 V2.0.0
-***结构调整：标准库的支持，从RTE方式改为手动搭建标准库
+***结构调整：标 准库的支持，从RTE方式改为手动搭建标准库
 
 ***取消定时器切换显示和数据采集，利用RTOS去执行
 
@@ -57,6 +57,7 @@ PB9   --------    OLED_SDA
 
 int main(void)
 {
+  SysTick_Init(72);
   delay_ms(500);
   led_init();           //LED初始化
   OLED_Init();          //OLED初始化
@@ -64,7 +65,7 @@ int main(void)
   OLED_Update();        //OLED清屏
   adc_init();           //初始ADC
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);//中断优先级分组
-  SysTick_Init(72);
+
   Uart_Init(115200);
     
   Send_String("ADC+DMA+ROTS+OLED+UART \r\n");
